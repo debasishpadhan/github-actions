@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Run a one-line script
-        run: echo Hello, world! Dev
+        run: echo Hello, world! Dev ${{ github.ref }}
           
   main-run:
     if: github.ref == 'refs/heads/main'
@@ -28,14 +28,14 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Run a one-line script
-        run: echo Hello, world! Main
+        run: echo Hello, world! Main ${{ github.ref }}
         
   release-run:
-    #if: github.ref == 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v3
       
       - name: Run a one-line script
-        run: echo Hello, world! Release
+        run: echo Hello, world! Release ${{ github.ref }}
